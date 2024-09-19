@@ -41,10 +41,10 @@ This script follows the OAuth2 authorization flow to:
 6. The script will use the access token to make an authenticated API request to list organizations in your Meraki account and print the response.
 
 ## Flask routes
-`/` and `/networks`: Displays a list of networks for the authenticated organizations.
-`/login`: Redirects users to the Meraki OAuth login.
-`/callback`: Handles the OAuth callback and fetches tokens.
-`/delete_org/<org_id>`: Removes an organization's token.
+* `/` and `/networks`: Displays a list of networks for the authenticated organizations.
+* `/login`: Redirects users to the Meraki OAuth login.
+* `/callback`: Handles the OAuth callback and fetches tokens.
+* `/delete_org/<org_id>`: Removes an organization's token.
 
 
 ## Notes
