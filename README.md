@@ -1,6 +1,7 @@
 # Meraki API OAuth2 Examples
 
-`minimalistic_example.py`: This is a minimalistic Python example demonstrating how to leverage Meraki's OAuth2 capabilities to authenticate and make API requests using OAuth tokens.
+`minimalistic_example.py`: This is a minimalistic Python example demonstrating how to leverage Meraki's OAuth2 capabilities to authenticate and make API requests using OAuth tokens. This example will make only a single API call with the OAuth token, and won't store the token.
+`flask_example.py`: This is a Python example demonstrating how to leverage Meraki's OAuth2 capabilities to authenticate and make API requests using OAuth tokens. This example includes callback handling, token refresh, etc'.
 
 ## Prerequisites
 
@@ -10,10 +11,12 @@ Before running the code, ensure you have the following:
 2. Required Python libraries:
    - `requests`
    - `requests_oauthlib`
+   - `flask`
+   - `rich`
    
    You can install these libraries using pip:
    ```bash
-   pip install requests requests_oauthlib
+   pip install requests requests_oauthlib flask rich
    ```
 3. Meraki Dashboard API Access:
     * Register your app on the [Meraki OAuth app registry](as.meraki.com) to obtain a CLIENT_ID and CLIENT_SECRET.
@@ -37,9 +40,19 @@ This script follows the OAuth2 authorization flow to:
 5. After authorizing, you will be redirected to a URL (https://localhost/). Copy the entire URL from your browser and paste it into the script when prompted.
 6. The script will use the access token to make an authenticated API request to list organizations in your Meraki account and print the response.
 
+## Flask routes
+`/` and `/networks`: Displays a list of networks for the authenticated organizations.
+`/login`: Redirects users to the Meraki OAuth login.
+`/callback`: Handles the OAuth callback and fetches tokens.
+`/delete_org/<org_id>`: Removes an organization's token.
+
+
 ## Notes
 * Redirect URI: For testing purposes, the redirect URI is set to `https://localhost`, which may not work unless you're running a local server. You can configure this in your Meraki app settings.
 * Scopes: The scope used in this example is `dashboard:general:config:read`. Adjust the scope based on the permissions your app needs.
+* This example uses a self-signed certificate for local testing (`ssl_context='adhoc'`), which is not suitable for production environments.
+* Always secure sensitive information such as tokens, client secrets, and refresh tokens in production.
+
 
 
 ----
