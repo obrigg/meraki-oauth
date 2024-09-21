@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network List</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 60%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #a5e674;
+        }
+        .delete-link {
+            color: red;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="window.location.href='https://localhost:5050/login'">Add Organizations</button>
+    <br><br>
+    <table>
+        <thead>
+            <tr>
+                {% for key in data[0].keys() %}
+                    <th>{{ key }}</th>
+                {% endfor %}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+                <tr>
+                    {% for value in item.values() %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                    <td>
+                        <a href="https://localhost:5050/delete_org/{{ item['Org ID'] }}" class="delete-link" onclick="return confirm('Are you sure you want to delete this token?');">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        // Optional: Add JavaScript to handle the delete action without navigating to a new page
+        // This would require additional JavaScript to send a DELETE request via AJAX
+    </script>
+</body>
+</html>
