@@ -19,7 +19,7 @@ Before running the code, ensure you have the following:
    pip install requests requests_oauthlib flask rich
    ```
 3. Meraki Dashboard API Access:
-    * Register your app on the [Meraki OAuth app registry](as.meraki.com) to obtain a CLIENT_ID and CLIENT_SECRET.
+    * Register your app on the [Meraki OAuth app registry](https://integrate.cisco.com) to obtain a CLIENT_ID and CLIENT_SECRET.
     * Set up environment variables for your CLIENT_ID and CLIENT_SECRET for security purposes:
     ```bash
     export MERAKI_CLIENT_ID=<your-client-id>
