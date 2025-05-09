@@ -9,14 +9,16 @@ Before running the code, ensure you have the following:
 
 1. Python 3.x installed.
 2. Required Python libraries:
-   - `requests`
-   - `requests_oauthlib`
-   - `flask`
    - `rich`
+   - `flask`
+   - `requests`
+   - `cryptography`
+   - `requests_oauthlib`
+
    
    You can install these libraries using pip:
    ```bash
-   pip install requests requests_oauthlib flask rich
+   pip install requests requests_oauthlib flask rich cryptography
    ```
 3. Meraki Dashboard API Access:
     * Register your app on the [Meraki OAuth app registry](https://integrate.cisco.com) to obtain a CLIENT_ID and CLIENT_SECRET.

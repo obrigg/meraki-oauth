@@ -12,7 +12,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
 # In this example, we will be saving the OAuth refresh tokens in a clear text file
-# NEVER STORE SECRECTS IN A CLEAR TEXT FILE! This is only for the simplicity of the example
+# NEVER STORE SECRETS IN A CLEAR TEXT FILE! This is only for the simplicity of the example
 
 def read_token_file() -> dict:
     try:

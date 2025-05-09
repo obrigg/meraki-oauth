@@ -1,5 +1,5 @@
-requests
-requests-oauthlib
-flask
 rich
+flask
+requests
 cryptography
+requests-oauthlib
