@@ -33,6 +33,7 @@ print(json.dumps(token, indent=2, sort_keys=True))
 print("**************************************")
 print("Never print or share your OAuth token in production environments. This is just for demonstration purposes.")
 print("**************************************")
+input("\nPress Enter to continue and make an API call with the access token.")
 
 # Step 5: Use the access token to interact with the API
 headers = {
@@ -42,6 +43,22 @@ headers = {
 
 # Make an API call to list organizations
 # Replace these with relevant API calls you'd like to make.
+print("\nMaking API call to list organizations...\n")
+response = requests.get('https://api.meraki.com/api/v1/organizations', headers=headers)
+print(json.dumps(response.json(), indent=2))
+
+# Step 6: Token refresh logic
+print("**************************************")
+print("\n\nImagine an hour has passed and the token has expired...")
+input("\nPress Enter to simulate token expiration and refresh.")
+
+token = meraki_oauth.refresh_token(TOKEN_URL, client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
+print("\n\n\n**************************************")
+print("Token information:")
+print(json.dumps(token, indent=2, sort_keys=True))
+print("**************************************")
+print("Never print or share your OAuth token in production environments. This is just for demonstration purposes.")
+print("**************************************")
 print("\nMaking API call to list organizations...\n")
 response = requests.get('https://api.meraki.com/api/v1/organizations', headers=headers)
 print(json.dumps(response.json(), indent=2))
