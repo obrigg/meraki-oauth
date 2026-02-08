@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Success - Meraki OAuth Manager{% endblock %}
+
+{% block content %}
+<div class="main-container fade-in">
+    <div class="text-center py-5">
+        <div class="icon-circle success mx-auto mb-4" style="width: 100px; height: 100px; font-size: 3rem;">
+            <i class="bi bi-check-circle"></i>
+        </div>
+        
+        <h1 class="mb-3">Successfully Connected!</h1>
+        
+        <div class="alert alert-success mx-auto" style="max-width: 600px;">
+            <h4 class="alert-heading">
+                <i class="bi bi-building"></i> Organization Connected
+            </h4>
+            <hr>
+            <p class="mb-0">Your Meraki organization has been successfully authorized and connected.</p>
+        </div>
+        
+        <div class="mt-4">
+            <a href="/networks" class="btn btn-meraki btn-lg">
+                <i class="bi bi-diagram-3"></i> View Networks
+            </a>
+            <a href="/login" class="btn btn-primary btn-lg ms-2">
+                <i class="bi bi-plus-circle"></i> Add Another Organization
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

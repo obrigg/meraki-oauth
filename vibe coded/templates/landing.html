@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome - Meraki OAuth Manager{% endblock %}
+
+{% block content %}
+<div class="main-container fade-in text-center">
+    <!-- Hero Section -->
+    <div class="py-5">
+        <div class="icon-circle success mx-auto mb-4" style="width: 120px; height: 120px; font-size: 4rem;">
+            <i class="bi bi-shield-lock"></i>
+        </div>
+        
+        <h1 class="display-3 fw-bold mb-3">Meraki OAuth Manager</h1>
+        <p class="lead text-muted mb-4">
+            Securely manage your Cisco Meraki organizations with OAuth 2.0
+        </p>
+        
+        <a href="/login" class="btn btn-meraki btn-lg">
+            <i class="bi bi-box-arrow-in-right"></i> Connect Your Organization
+        </a>
+        <a href="/networks" class="btn btn-primary btn-lg ms-2">
+            <i class="bi bi-diagram-3"></i> View Networks
+        </a>
+    </div>
+
+    <!-- Features -->
+    <div class="row mt-5 text-start">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="icon-circle success mb-3">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <h4>Secure Authentication</h4>
+                    <p class="text-muted">
+                        OAuth 2.0 protocol ensures your credentials are never stored or exposed
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="icon-circle info mb-3">
+                        <i class="bi bi-speedometer2"></i>
+                    </div>
+                    <h4>Token Management</h4>
+                    <p class="text-muted">
+                        Automatic token refresh and validation for seamless access
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="icon-circle warning mb-3">
+                        <i class="bi bi-diagram-3"></i>
+                    </div>
+                    <h4>Multi-Org Support</h4>
+                    <p class="text-muted">
+                        Manage multiple Meraki organizations from a single dashboard
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How it Works -->
+    <div class="mt-5">
+        <h2 class="mb-4">How It Works</h2>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <div class="icon-circle info mb-3">
+                            <i class="bi bi-1-circle"></i>
+                        </div>
+                        <h5>Connect</h5>
+                        <p class="small text-muted">Click to authorize with your Meraki account</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <div class="icon-circle info mb-3">
+                            <i class="bi bi-2-circle"></i>
+                        </div>
+                        <h5>Authenticate</h5>
+                        <p class="small text-muted">Log in through Meraki's secure portal</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <div class="icon-circle info mb-3">
+                            <i class="bi bi-3-circle"></i>
+                        </div>
+                        <h5>Approve</h5>
+                        <p class="small text-muted">Grant access to your organization</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <div class="icon-circle success mb-3">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+                        <h5>Manage</h5>
+                        <p class="small text-muted">View and manage your networks</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

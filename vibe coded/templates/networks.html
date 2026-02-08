@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}Networks - Meraki OAuth Manager{% endblock %}
+
+{% block content %}
+<div class="main-container fade-in">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1><i class="bi bi-diagram-3"></i> Your Networks</h1>
+        <p class="subtitle">Manage all your Meraki networks across authorized organizations</p>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="stat-card">
+                <h3>{{ stats.total_orgs }}</h3>
+                <p><i class="bi bi-building"></i> Organizations</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card">
+                <h3>{{ stats.total_networks }}</h3>
+                <p><i class="bi bi-diagram-3"></i> Networks</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card">
+                <h3>{{ stats.valid_tokens }}</h3>
+                <p><i class="bi bi-shield-check"></i> Valid Tokens</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="mb-4 text-center">
+        <a href="/login" class="btn btn-meraki btn-lg">
+            <i class="bi bi-plus-circle"></i> Add New Organization
+        </a>
+        <button class="btn btn-primary btn-lg ms-2" onclick="location.reload()">
+            <i class="bi bi-arrow-clockwise"></i> Refresh
+        </button>
+    </div>
+
+    <!-- Networks by Organization -->
+    {% for org_id, networks in networks_by_org.items() %}
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <span>
+                <i class="bi bi-building"></i> Organization: {{ org_id }}
+            </span>
+            <div>
+                {% if networks[0].get('error') %}
+                <span class="badge bg-danger">
+                    <i class="bi bi-exclamation-triangle"></i> Error
+                </span>
+                {% else %}
+                <span class="badge bg-success">
+                    <i class="bi bi-check-circle"></i> {{ networks|length }} Networks
+                </span>
+                {% endif %}
+                <a href="/delete_org/{{ org_id }}" class="btn btn-sm btn-danger ms-2" 
+                   onclick="return confirm('Are you sure you want to remove this organization?')">
+                    <i class="bi bi-trash"></i> Remove
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            {% if networks[0].get('error') %}
+            <div class="alert alert-warning">
+                <i class="bi bi-exclamation-triangle"></i> 
+                <strong>Warning:</strong> {{ networks[0].error }}
+                <a href="/login" class="alert-link">Re-authorize this organization</a>
+            </div>
+            {% else %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th><i class="bi bi-hash"></i> Network Name</th>
+                            <th><i class="bi bi-tag"></i> Network ID</th>
+                            <th><i class="bi bi-box"></i> Product Types</th>
+                            <th><i class="bi bi-geo-alt"></i> Time Zone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for network in networks %}
+                        <tr>
+                            <td>
+                                <strong>{{ network.name }}</strong>
+                            </td>
+                            <td>
+                                <code>{{ network.id }}</code>
+                            </td>
+                            <td>
+                                {% for product in network.productTypes %}
+                                <span class="badge bg-info me-1">{{ product }}</span>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <small class="text-muted">
+                                    <i class="bi bi-clock"></i> {{ network.timeZone or 'N/A' }}
+                                </small>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+
+    {% if not networks_by_org %}
+    <div class="card">
+        <div class="card-body text-center py-5">
+            <div class="icon-circle info mx-auto mb-3" style="width: 80px; height: 80px; font-size: 2.5rem;">
+                <i class="bi bi-inbox"></i>
+            </div>
+            <h3>No Organizations Connected</h3>
+            <p class="text-muted">Get started by adding your first Meraki organization</p>
+            <a href="/login" class="btn btn-meraki btn-lg mt-3">
+                <i class="bi bi-plus-circle"></i> Connect Organization
+            </a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Auto-refresh every 5 minutes
+    setTimeout(function() {
+        location.reload();
+    }, 300000);
+    
+    // Add smooth scroll animation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+{% endblock %}
