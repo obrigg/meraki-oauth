@@ -1,4 +1,5 @@
 import os
+import json
 import requests
 from requests_oauthlib import OAuth2Session
 
@@ -18,14 +19,20 @@ meraki_oauth = OAuth2Session(CLIENT_ID, redirect_uri=REDIRECT_URI, scope=SCOPE)
 # Step 2: Direct user to the authorization URL
 authorization_url, state = meraki_oauth.authorization_url(AUTHORIZATION_BASE_URL)
 
-print(f'Go to this URL and authorize the app: {authorization_url}')
+print(f'\n\n\nGo to this URL and authorize the app: {authorization_url}')
 
 # Step 3: User provides authorization response with redirect to your callback
 # You would typically receive this in a web app, but for testing you can copy the full URL manually
-redirect_response = input('Paste the full redirect URL here: ')
+redirect_response = input('\nPaste the full redirect URL here: ')
 
 # Step 4: Fetch the access token
 token = meraki_oauth.fetch_token(TOKEN_URL, authorization_response=redirect_response, client_secret=CLIENT_SECRET)
+print("\n\n\n**************************************")
+print("Token information:")
+print(json.dumps(token, indent=2, sort_keys=True))
+print("**************************************")
+print("Never print or share your OAuth token in production environments. This is just for demonstration purposes.")
+print("**************************************")
 
 # Step 5: Use the access token to interact with the API
 headers = {
@@ -35,5 +42,6 @@ headers = {
 
 # Make an API call to list organizations
 # Replace these with relevant API calls you'd like to make.
+print("\nMaking API call to list organizations...\n")
 response = requests.get('https://api.meraki.com/api/v1/organizations', headers=headers)
-print(response.json())
+print(json.dumps(response.json(), indent=2))
